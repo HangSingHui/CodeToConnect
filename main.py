@@ -13,16 +13,10 @@ config_details = {}
 #Key - eventID
 #values is m,b,b divisorRatio, spread
 
-#Create a new rate hash map based on event
-rate_event = {}
-#Key: eventID, Value: rate
-
 trade_events = {}
-#Key: eventID, Value: Currency object
 
 
-
-tenor_dict={"1M": 30, "2M": 60, "3M": 90,"6M":180, "9M":270, "12M":360 }
+# tenor_dict={"1M": 30, "2M": 60, "3M": 90,"6M":180, "9M":270, "12M":360 }
 
 class Currency():
     def __init__(self):
@@ -30,10 +24,10 @@ class Currency():
         self.ccy = None
         self.tenor = None
         self.quantity = 0
-        self.m = None
-        self.b = None
-        self.divisorRatio = None
-        self.spread = None
+    
+    
+    def __str__(self):
+        return f"{self.rate}{self.ccy}{self.tenor}{self.quantity}"
 
     # after every event > calculation of ask and bid (save as a method)
 
@@ -71,6 +65,9 @@ for event in obj:
             temp_class.quantity += qty
         else:
             temp_class.quantity -= qty
+        
+        #Attach the key to the class
+        currency_states[key] = temp_class
     
 
     elif eventName == "ConfigEvent":
@@ -90,7 +87,10 @@ for event in obj:
         
 
 
-print(config_details)
+# print(config_details)
+
+for currency in currency_states:
+    print(currency_states[currency])
 
 
 

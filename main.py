@@ -22,7 +22,18 @@ class Currency():
         self.tenor = None
         self.quantity = None
 
+    # after every event > calculation of ask and bid (save as a method)
+
+    # one dataset for all the current rates (temp data storage) - store the latest rate per currency 
+    # key as currency, tenor > will be considered as the latest value for your calc (position tied to currency and tenor≥)
+
 for event in obj:
+    # read event 
+    # edit the dataset based on the type of event 
+    # calc bid and ask for all contracts based on the global dataset 
+    # add to list - {'eventid': []}
+
+    ######################
     #Get event type
     id  = event["EventId"]
     id = Currency()
@@ -32,7 +43,10 @@ for event in obj:
         id.position = event["Quantity"]
     elif event["EventType"] == "FXMidEvent":
         #Extract rate
+        id.rate = event["Ccy"]
         #Extract ccy
+        id.ccy = event["rate"]
+        
         pass
     else:
         #Extract m, b ,divsior, spread

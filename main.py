@@ -9,7 +9,7 @@ currency_states = {}
 newest_currency_states = {}
 
 #Create a new config event hash map
-config_event = {}
+config_details = {}
 #Key - eventID
 #values is m,b,b divisorRatio, spread
 
@@ -29,55 +29,70 @@ class Currency():
         self.rate = None
         self.ccy = None
         self.tenor = None
-        self.quantity = None
-        self.config = None #this links to a configEvent ID
+        self.quantity = 0
+        self.m = None
+        self.b = None
+        self.divisorRatio = None
+        self.spread = None
+
+    # after every event > calculation of ask and bid (save as a method)
+
+    # one dataset for all the current rates (temp data storage) - store the latest rate per currency 
+    # key as currency, tenor > will be considered as the latest value for your calc (position tied to currency and tenor≥)
 
 for event in obj:
-    # print(event)
-    #Get event type
-    
-    #Get the id of the event
-    id  = event["EventId"]
+    # read event 
+    # edit the dataset based on the type of event - currency, rate, m, b, divisorratio, spread
+    # calc bid and ask for all contracts based on the global dataset 
+    # add to list - {'eventid': []}
 
-    # #Create a Currency object
-    # id = Currency()
 
-    name = event["EventType"]
-    print(name)
+    #Check events
+    eventName = event["EventType"]
+    if eventName == "TradeEvent":
+        key = event["Ccy"] + "-" + event["Tenor"]
 
-    currency = event["Ccy"]
-
-    #Create the key to store in the currency state
-
-    # if name == "ConfigEvent":
-    #     #Create a new configEvent element in configElement dictionary
-    #     config_event[id] = event
-    
-    if name == "FXMidEvent":
-        #Update the rate event list
-        rate_event[id] = 
+        if key not in currency_states:
+            #Create new currency class
+            temp_class = Currency()
         
-print(rate_event)
+        else:
+            #Retrieve the class
+            temp_class = currency_states[key]
 
-#Dont need to store the eventID, can just get the rate directly eg. anything after event 6 (supposing that rate changes at event 6) will have the rate till the next one
+        #update quantites in the respective ccy and tenor
 
-
-
-    # if event["EventType"] == "TradeEvent":
-    #     #Extract Tenor and position
-    #     id.tenor = tenor_dict[event["Tenor"]]
-    #     id.quantity = event["Quantity"]
-
-
-    # elif event["EventType"] == "FXMidEvent":
-    #     #Extract rate
-    #     #Extract ccy
-    #     pass
-    # else:
-    #     #Extract m, b ,divsior, spread
-    #     pass
+        action = event["BuySell"]
+        #Update quantity based on buy and sell
+        #Get quantity
+        qty = event["Quantity"]
+        if action == "buy":
+            #Means plus
+            temp_class.quantity += qty
+        else:
+            temp_class.quantity -= qty
     
-    #Store in currency dictionary
+
+    elif eventName == "ConfigEvent":
+        id = event["EventId"]
+        #Store in global config details list
+        config_details[id] = event
+    
+    #Eventname == FXMidEvent
+    else:
+        #Update the rate of all contracts with a particular currency
+        rate = event["rate"]
+        currency = event["Ccy"]
+        for key in currency_states:
+            if currency == key.split("-")[0]:
+                #Then update the rate of the currency
+                currency_states[key].rate = rate
+        
+
+
+print(config_details)
+
+
 
 
 

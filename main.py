@@ -59,27 +59,29 @@ def determine_QuoteStatus(bid, ask, quantity, tenor, rate):
     else:
         return "TRADABLE"
 
-def print_dashboard(events):
+def print_dashboard(events,eventName):
     # Print the dashboard header
     print("---------------- Dashboard ----------------")
-    print("|{:^18}|{:^15}|{:^10}|{:^10}|{:^15}|".format("EventId", "EventType", "Ccy - Tenor", "Position", "QuoteStatus"))
-    print("----------------------------------------------")
+    print("EventId:" + str(num))
+    print("Event Type: "+ eventName)
+    print("|{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format("Ccy - Tenor", "Position", "Ask", "Bid","QuoteStatus"))
+    print("-----------------------------------------------------------------------------------------------------------")
+
+   
     
     # Print each event's information
     for event in events:
-        print(events[event])
         event_id = num
         event_type = eventName
-        
-        for quote in event['quotes']:
-            ccy_tenor = quote['ccy_tenor']
-            position = quote['position']
-            ask = quote['ask']
-            bid = quote['bid']
-            quote_status = quote['quote_status']
-            print("|{:^18}|{:^15}|{:^14}|{:^11}|{:^15}|".format(event_id, event_type, ccy_tenor, position, quote_status))
-            print("|{:^18}|{:^15}|{:^10.5f}|{:^10.5f}|{:^15}|".format("", "", ask, bid, ""))
-            print("----------------------------------------------")
+        # for quote in event['quotes']:
+        ccy_tenor = event
+        position = events[event].quantity
+        ask = events[event].ask
+        bid = events[event].bid
+        quote_status = events[event].quoteStatus
+        print("{:^20}|{:^20}|{:^20}|{:^20}|{:^20}|".format(ccy_tenor, position, ask, bid,quote_status))
+        # print("{:^15}|{:^15}|{:^15}|".format("", "", ask, bid, ""))
+    print("-----------------------------------------------------------------------------------------------------------")
 
 
 num = 1
@@ -92,6 +94,7 @@ for event in obj:
 
     #Check events
     eventName = event["EventType"]
+
     if eventName == "TradeEvent":
         key = event["Ccy"] + "-" + event["Tenor"]
 
@@ -168,10 +171,8 @@ for event in obj:
             currency_states[key].quoteStatus = state
         
 
-
-    
     #Eventname == FXMidEvent
-    else:
+    elif eventName== "FXMidEvent":
         #Update the rate of all contracts with a particular currency
         rate = event["rate"]
         currency = event["Ccy"]
@@ -200,9 +201,10 @@ for event in obj:
 
                         # 
         # Recalculate bid and ask for all the same currency at ccy
-        print_dashboard(currency_states)
+    
+    print_dashboard(currency_states, eventName)
 
-        num +=1
+    num +=1
     
 
         
@@ -219,9 +221,20 @@ obj1 = json.load(f1)
 
 with open('output.json', 'w') as put_in:
     for record in obj1:
+        print(record)
         input_currency = record["Ccy"]
         input_tenor = record["Tenor"]
         input_eventid = record["EventId"]
+        
+        key = input_currency + "-" + input_tenor 
+        # print(key)
+
+        if key in currency_states.keys():
+            position = currency_states[key].quantity
+            bid = currency_states[key].bid
+            ask = currency_states[key].ask
+            quoteStatus = currency_states[key].quoteStatus
+
 
         # Read the specific values for particular contract at event
         output = {
@@ -229,10 +242,10 @@ with open('output.json', 'w') as put_in:
             "Ccy": input_currency,
             "Tenor": input_tenor,
             # change the below variable names to match
-            "Position": "position",
-            "Bid": "bid",
-            "Ask": "ask",
-            "QuoteStatus": "quote_status"
+            "Position": position,
+            "Bid": bid,
+            "Ask": ask,
+            "QuoteStatus": quoteStatus
         }   
         json_string = json.dumps(output, indent = 4)
         put_in.write(json_string)
@@ -240,12 +253,12 @@ with open('output.json', 'w') as put_in:
 
 
 
-for currency in currency_states:
-    # time.sleep(5)
-    print(currency, currency_states[currency])
+# for currency in currency_states:
+#     # time.sleep(5)
+#     print(currency, currency_states[currency])
 
 
-#Dashboard
+# #Dashboard
 
 
 

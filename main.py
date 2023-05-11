@@ -71,8 +71,6 @@ def print_dashboard(events,eventName):
     
     # Print each event's information
     for event in events:
-        event_id = num
-        event_type = eventName
         # for quote in event['quotes']:
         ccy_tenor = event
         position = events[event].quantity
@@ -116,11 +114,12 @@ for event in obj:
         #Get quantity
 
         qty = event["Quantity"]
+        
         if action == "buy":
             #Means plus
-            temp_class.quantity += qty
-        else:
             temp_class.quantity -= qty
+        else:
+            temp_class.quantity += qty
         
         latest_key = list(config_details)[-1]
         m, b, divisorRatio, spread = config_details[latest_key]["m"],config_details[latest_key]["b"],config_details[latest_key]["DivisorRatio"],config_details[latest_key]["Spread"]

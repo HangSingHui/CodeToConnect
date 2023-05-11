@@ -1,73 +1,83 @@
-{
-    "EventId": 5,
-    "Ccy": "CHX",
-    "Tenor": "1M",
-    "Position": 1900,
-    "Bid": 0.86161,
-    "Ask": 0.86191,
-    "QuoteStatus": "TRADABLE"
-}{
-    "EventId": 25,
-    "Ccy": "GBX",
-    "Tenor": "1M",
-    "Position": -100,
-    "Bid": 0.81081,
-    "Ask": 0.81111,
-    "QuoteStatus": "TRADABLE"
-}{
-    "EventId": 20,
-    "Ccy": "GBX",
-    "Tenor": "1M",
-    "Position": -100,
-    "Bid": 0.81081,
-    "Ask": 0.81111,
-    "QuoteStatus": "TRADABLE"
-}{
-    "EventId": 66,
-    "Ccy": "JPX",
-    "Tenor": "12M",
-    "Position": -999900,
-    "Bid": 241.58899,
-    "Ask": 241.58928999999998,
-    "QuoteStatus": "NON-TRADABLE"
-}{
-    "EventId": 3,
-    "Ccy": "GBX",
-    "Tenor": "1M",
-    "Position": -100,
-    "Bid": 0.81081,
-    "Ask": 0.81111,
-    "QuoteStatus": "TRADABLE"
-}{
-    "EventId": 91,
-    "Ccy": "GBX",
-    "Tenor": "2M",
-    "Position": -100,
-    "Bid": 0.81081,
-    "Ask": 0.81111,
-    "QuoteStatus": "TRADABLE"
-}{
-    "EventId": 3,
-    "Ccy": "EUX",
-    "Tenor": "6M",
-    "Position": 100,
-    "Bid": 0.89439,
-    "Ask": 0.89469,
-    "QuoteStatus": "TRADABLE"
-}{
-    "EventId": 99,
-    "Ccy": "JPX",
-    "Tenor": "12M",
-    "Position": -999900,
-    "Bid": 241.58899,
-    "Ask": 241.58928999999998,
-    "QuoteStatus": "NON-TRADABLE"
-}{
-    "EventId": 89,
-    "Ccy": "CHX",
-    "Tenor": "2M",
-    "Position": 2000,
-    "Bid": 0.84265,
-    "Ask": 0.84295,
-    "QuoteStatus": "TRADABLE"
-}
+[
+    {
+        "EventId": 5,
+        "Ccy": "CHX",
+        "Tenor": "1M",
+        "Position": 1900,
+        "Bid": 0.86161,
+        "Ask": 0.86191,
+        "QuoteStatus": "TRADABLE"
+    },
+    {
+        "EventId": 25,
+        "Ccy": "GBX",
+        "Tenor": "1M",
+        "Position": -100,
+        "Bid": 0.81081,
+        "Ask": 0.81111,
+        "QuoteStatus": "TRADABLE"
+    },
+    {
+        "EventId": 20,
+        "Ccy": "GBX",
+        "Tenor": "1M",
+        "Position": -100,
+        "Bid": 0.81081,
+        "Ask": 0.81111,
+        "QuoteStatus": "TRADABLE"
+    },
+    {
+        "EventId": 66,
+        "Ccy": "JPX",
+        "Tenor": "12M",
+        "Position": -999900,
+        "Bid": 241.58899,
+        "Ask": 241.58928999999998,
+        "QuoteStatus": "NON-TRADABLE"
+    },
+    {
+        "EventId": 3,
+        "Ccy": "GBX",
+        "Tenor": "1M",
+        "Position": -100,
+        "Bid": 0.81081,
+        "Ask": 0.81111,
+        "QuoteStatus": "TRADABLE"
+    },
+    {
+        "EventId": 91,
+        "Ccy": "GBX",
+        "Tenor": "2M",
+        "Position": -100,
+        "Bid": 0.81081,
+        "Ask": 0.81111,
+        "QuoteStatus": "TRADABLE"
+    },
+    {
+        "EventId": 3,
+        "Ccy": "EUX",
+        "Tenor": "6M",
+        "Position": 100,
+        "Bid": 0.89439,
+        "Ask": 0.89469,
+        "QuoteStatus": "TRADABLE"
+    },
+    {
+        "EventId": 99,
+        "Ccy": "JPX",
+        "Tenor": "12M",
+        "Position": -999900,
+        "Bid": 241.58899,
+        "Ask": 241.58928999999998,
+        "QuoteStatus": "NON-TRADABLE"
+    },
+    {
+        "EventId": 89,
+        "Ccy": "CHX",
+        "Tenor": "2M",
+        "Position": 2000,
+        "Bid": 0.84265,
+        "Ask": 0.84295,
+        "QuoteStatus": "TRADABLE"
+    }
+]

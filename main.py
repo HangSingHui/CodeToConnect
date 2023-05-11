@@ -204,9 +204,6 @@ for event in obj:
     print_dashboard(currency_states, eventName)
 
     num +=1
-    
-
-        
 
     #Dashboard
 
@@ -217,6 +214,8 @@ for event in obj:
 
 f1 = open("sample_input.json")
 obj1 = json.load(f1)
+
+arr = []
 
 with open('output.json', 'w') as put_in:
     for record in obj1:
@@ -246,15 +245,17 @@ with open('output.json', 'w') as put_in:
             "Ask": ask,
             "QuoteStatus": quoteStatus
         }   
-        json_string = json.dumps(output, indent = 4)
-        put_in.write(json_string)
+
+        arr.append(output)
+
+    json_string = json.dumps(arr, indent=4)
+    put_in.write(json_string)
 
 
 
-
-# for currency in currency_states:
-#     # time.sleep(5)
-#     print(currency, currency_states[currency])
+for currency in currency_states:
+    time.sleep(5)
+    print(currency, currency_states[currency])
 
 
 # #Dashboard
